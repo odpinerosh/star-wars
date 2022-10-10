@@ -1,4 +1,7 @@
 import logo from './logo.svg';
+import Card from './UI/Card';
+import Button from './UI/Button';
+import Movie from './Movie';
 import './App.css';
 
 function App() {
@@ -6,18 +9,16 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Card classes='card card-box-shadow' cardId='card-summary'>
+          <Button classes='btn ui-btn' caption='Lista de Películas'></Button>
+        </Card>
+        <Card classes='card' cardId='card-wrapper'>
+        <Movie></Movie>
+        <Movie></Movie>
+      </Card>
       </header>
+      
+
     </div>
   );
 }
