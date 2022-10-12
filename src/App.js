@@ -8,22 +8,36 @@ import './App.css';
 function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [fetchError, setFetchError] = useState(null);
+
   async function fetchMovieHandler() {
     setLoading(true);
-    const response = await fetch('https://swapi.dev/api/films/');
-    const data = await response.json();
-    const transformedMovies = data.results.map( film => {
-      return {
-        id: film.episode_id,
-        title: film.title,
-        openingText: film.opening_crawl,
-        releaseDate: film.release_date
-      };
-    });
-    setMovies(transformedMovies);
-    setLoading(false);
-  }
+    setFetchError(null);
 
+    try {
+      const response = await fetch('https://swapi.dev/api/films/');
+      
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      console.log("Despues del THROW");
+      const data = await response.json();
+      const transformedMovies = data.results.map( film => {
+        return {
+          id: film.episode_id,
+          title: film.title,
+          openingText: film.opening_crawl,
+          releaseDate: film.release_date
+        };
+      });
+      setMovies(transformedMovies);
+      } catch (error) {
+       
+        setFetchError(error);
+       
+      }
+      setLoading(false);
+    }  
   return (
     <div className="App">
       <header className="App-header">
@@ -41,10 +55,9 @@ function App() {
           }
           {!isLoading && movies.length === 0 && <p>No hay películas.</p>}
           {isLoading && <p>Obteniendo películas...</p>}
+          {fetchError && <p>Se presentó un error. Intente más tarde.</p>}
         </Card>
       </header>
-      
-
     </div>
   );
 }
