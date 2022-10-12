@@ -7,7 +7,9 @@ import './App.css';
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [isLoading, setLoading] = useState(false);
   async function fetchMovieHandler() {
+    setLoading(true);
     const response = await fetch('https://swapi.dev/api/films/');
     const data = await response.json();
     const transformedMovies = data.results.map( film => {
@@ -19,6 +21,7 @@ function App() {
       };
     });
     setMovies(transformedMovies);
+    setLoading(false);
   }
 
   return (
@@ -29,12 +32,15 @@ function App() {
           <Button classes='btn ui-btn' caption='Lista de Películas' onClick={fetchMovieHandler}></Button>
         </Card>
         <Card classes='card' cardId='card-wrapper'>
-          {movies.map(movie => (
+          {!isLoading && movies.length > 0 && (movies.map(movie => (
             <Movie key={movie.id}
                    title={movie.title}
                    opText={movie.openingText}
                    reDate={movie.releaseDate} />
-          ))} 
+            )))
+          }
+          {!isLoading && movies.length === 0 && <p>No hay películas.</p>}
+          {isLoading && <p>Obteniendo películas...</p>}
         </Card>
       </header>
       
