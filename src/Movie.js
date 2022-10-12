@@ -6,7 +6,9 @@ const Movie = props => {
 
     return (
         <Card classes='card card-box-shadow' cardId='card-movie'>
-            <p>Hola, amigos</p>
+            <h2>{props.title}</h2>
+            <h3>{props.reDate}</h3>
+            <p>{props.opText}</p>
         </Card>
     );
 

@@ -15,8 +15,8 @@
   
   .ui-btn:hover,
   .ui-btn:active {
-    background-color: #a0431e;
-    border-color: #641e03;
+    background-color: rgb(0,90,255);
+    border-color: rgb(166,0,255);
   }
   
   .btn-close {

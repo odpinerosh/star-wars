@@ -1,17 +1,17 @@
 #card-summary {
-    background-color: rgb(29, 34, 39);
+    background-color: #ffffff;
     color:aliceblue;
     width: 50vw;
 }
 
 #card-wrapper {
     background-color:aliceblue;
-    color: rgb(6, 17, 17);
+    color: rgb(166,0,255);
     width: 60vw;
 }
 
 #card-movie {
-    background-color:rgb(6, 17, 17);
+    background-color:#2600ff;
     color: rgb(255, 255, 255);
     width: 50vw;
 }
