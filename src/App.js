@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import logo from './logo.svg';
 import Card from './UI/Card';
 import Button from './UI/Button';
@@ -10,7 +10,8 @@ function App() {
   const [isLoading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(null);
 
-  async function fetchMovieHandler() {
+  //async function fetchMovieHandler() {
+    const fetchMovieHandler = useCallback(async () => {
     setLoading(true);
     setFetchError(null);
 
@@ -37,7 +38,12 @@ function App() {
        
       }
       setLoading(false);
-    }  
+    }, []);
+    
+  useEffect(() => {
+    fetchMovieHandler();
+  }, [fetchMovieHandler]);
+
   return (
     <div className="App">
       <header className="App-header">
