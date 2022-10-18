@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import Card from './UI/Card';
 import Button from './UI/Button';
 import Movie from './Movie';
+import AddMovie from './AddMovie';
 import './App.css';
 
 function App() {
@@ -11,17 +12,16 @@ function App() {
   const [fetchError, setFetchError] = useState(null);
 
   //async function fetchMovieHandler() {
-    const fetchMovieHandler = useCallback(async () => {
+  const fetchMovieHandler = useCallback(async () => {
     setLoading(true);
     setFetchError(null);
 
     try {
-      const response = await fetch('https://swapi.dev/api/films/');
+      const response = await fetch('https://react-star-wars-48111-default-rtdb.firebaseio.com/starwars.json');
       
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-      console.log("Despues del THROW");
       const data = await response.json();
       const transformedMovies = data.results.map( film => {
         return {
@@ -48,6 +48,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <Card>
+          <AddMovie />
+        </Card>
         <Card classes='card card-box-shadow' cardId='card-summary'>
           <Button classes='btn ui-btn' caption='Lista de Películas' onClick={fetchMovieHandler}></Button>
         </Card>
