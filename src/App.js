@@ -23,15 +23,22 @@ function App() {
         throw new Error(response.statusText);
       }
       const data = await response.json();
-      const transformedMovies = data.results.map( film => {
-        return {
-          id: film.episode_id,
-          title: film.title,
-          openingText: film.opening_crawl,
-          releaseDate: film.release_date
-        };
-      });
-      setMovies(transformedMovies);
+
+      const loadedMovies = [];
+
+      for (const key in data) {
+        loadedMovies.push({
+          id: key,
+          title: data[key].title,
+          openingText: data[key].openingText,
+          releaseDate: data[key].releaseDate
+        });
+      }
+
+      console.log("ARRAY - LOADED MOVIES");
+      console.log(loadedMovies);
+      
+      setMovies(loadedMovies);
       } catch (error) {
        
         setFetchError(error);
